@@ -276,6 +276,8 @@
     <Content Include="Views\Home\notFound.cshtml" />
     <Content Include="Views\Shared\_videos.cshtml" />
     <Content Include="Views\Home\videos.cshtml" />
+    <Content Include="Views\Shared\LoginPage.cshtml" />
+    <Content Include="Views\Home\LoginPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

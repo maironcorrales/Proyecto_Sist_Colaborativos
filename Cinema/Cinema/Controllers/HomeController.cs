@@ -42,5 +42,10 @@ namespace Cinema.Controllers
         {
             return View();
         }
+        public ActionResult LoginPage()
+        {
+            ViewBag.Message = "Login";
+            return View();
+        }
     }
 }

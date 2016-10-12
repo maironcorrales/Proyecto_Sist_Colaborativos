@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "LoginPage";
+    Layout = "~/Views/Shared/LoginPage.cshtml";
+}
+
+<body>
+    <!-- header-section-starts -->
+    <div class="full">
+        <div class="menu">
+            <ul>
+                <li><a class="active" href="@Url.Action("Index","Home")"><i class="home"></i></a></li>
+                <li><a href="@Url.Action("Videos","Home")"><div class="video"><i class="videos"></i><i class="videos1"></i></div></a></li>
+                <li><a href="@Url.Action("Reviews","Home")"><div class="cat"><i class="watching"></i><i class="watching1"></i></div></a></li>
+                <li><a href="@Url.Action("NotFound","Home")"><div class="bk"><i class="booking"></i><i class="booking1"></i></div></a></li>
+                <li><a href="@Url.Action("Contact","Home")"><div class="cnt"><i class="contact"></i><i class="contact1"></i></div></a></li>
+                <li><a href="@Url.Action("LoginPage","Home")"><div class="bk"><i class="booking"></i><i class="booking1"></i></div></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="header">
+            <div class="top-header">
+                <div class="logo">
+                    <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/Template/")images/logo.png" alt="" /></a>
+                    <p>Movie Theater</p>
+                </div>
+                <div class="search">
+                    <form>
+                        <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" />
+                        <input type="submit" value="">
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <h6>Disclaimer : </h6>
+            <p class="claim">This is a freebies and not an official website, I have no intention of disclose any movie, brand, news.My goal here is to train or excercise my skill and share this freebies.</p>
+            <a href="example@mail.com">example@mail.com</a>
+            <div class="copyright">
+                <p> Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
