@@ -4,6 +4,24 @@
 }
 
 <body>
+    <div id="fb-root"></div>
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1808901009393722',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- header-section-starts -->
     <div class="full">
         <div class="menu">
@@ -16,32 +34,57 @@
                 <li><a href="@Url.Action("LoginPage","Home")"><div class="bk"><i class="booking"></i><i class="booking1"></i></div></a></li>
             </ul>
         </div>
-    </div>
-    <div class="main">
-        <div class="header">
-            <div class="top-header">
-                <div class="logo">
-                    <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/Template/")images/logo.png" alt="" /></a>
-                    <p>Movie Theater</p>
+        <div class="main">
+            <div class="contact-content">
+                <div class="top-header span_top">
+                    <div class="logo">
+                        <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/Content/Template/")images/logo.png" alt="" /></a>
+                        <p>Movie Theater</p>
+                    </div>
+                    <div class="search v-search">
+                        <form>
+                            <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" />
+                            <input type="submit" value="">
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="search">
-                    <form>
-                        <input type="text" value="Search.." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search..';}" />
-                        <input type="submit" value="">
-                    </form>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="footer">
-            <h6>Disclaimer : </h6>
-            <p class="claim">This is a freebies and not an official website, I have no intention of disclose any movie, brand, news.My goal here is to train or excercise my skill and share this freebies.</p>
-            <a href="example@mail.com">example@mail.com</a>
-            <div class="copyright">
-                <p> Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
-            </div>
-        </div>
-    </div>
 
+                <!--login Form-->
+                <div class="main-contact">
+                    <h3 class="head">Register</h3>
+                    <p>Or Sign in With:</p>
+                    <div class="contact-form">
+                        <form>
+                            <div class="col-md-6 contact-left">
+                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+
+                            </div>
+                            <div class="col-md-6 contact-right">
+                                <input type="text" placeholder="User" required />
+                                <input type="text" placeholder="E-mail" required />
+                                <input type="text" placeholder="Password" required />
+                                <input type="submit" value="Register" />
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    <h6>Disclaimer : </h6>
+                    <p class="claim">This is a freebies and not an official website, I have no intention of disclose any movie, brand, news.My goal here is to train or excercise my skill and share this freebies.</p>
+                    <a href="example@mail.com">example@mail.com</a>
+                    <div class="copyright">
+                        <p> Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        </div>
+        
+       
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
