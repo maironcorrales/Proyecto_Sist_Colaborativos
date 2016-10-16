@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CinemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_Factura">
+          <Key>
+            <PropertyRef Name="Tn_IdFactura" />
+          </Key>
+          <Property Name="Tn_IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_DescripcionFactura" Type="varbinary" MaxLength="5000" />
+          <Property Name="Tf_FechaFactura" Type="datetime" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Parametros">
+          <Key>
+            <PropertyRef Name="Tn_IdParametro" />
+          </Key>
+          <Property Name="Tn_IdParametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_DescripcionParametro" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tn_Valor" Type="int" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Proyeccion">
+          <Key>
+            <PropertyRef Name="Tn_IdProyeccion" />
+          </Key>
+          <Property Name="Tn_IdProyeccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tn_IdPelicula" Type="int" Nullable="false" />
+          <Property Name="Tn_IdSala" Type="int" Nullable="false" />
+          <Property Name="Tn_FechaHora" Type="datetime" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Reservacion">
+          <Key>
+            <PropertyRef Name="Tn_IdReservacion" />
+          </Key>
+          <Property Name="Tn_IdReservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tn_IdProyeccion" Type="int" Nullable="false" />
+          <Property Name="Tn_IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Tn_IdEstadoReserva" Type="int" Nullable="false" />
+          <Property Name="Tn_IdFactura" Type="int" />
+        </EntityType>
+        <EntityType Name="T_Sala">
+          <Key>
+            <PropertyRef Name="Tn_IdSala" />
+          </Key>
+          <Property Name="Tn_IdSala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_NombreSala" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="Tn_NumeroAsientos" Type="int" Nullable="false" />
+          <Property Name="Tn_IdtipoSala" Type="int" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_SalaTipo">
+          <Key>
+            <PropertyRef Name="Tn_IdTipoSala" />
+          </Key>
+          <Property Name="Tn_IdTipoSala" Type="int" Nullable="false" />
+          <Property Name="Tt_Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Silla">
+          <Key>
+            <PropertyRef Name="Tn_IdSilla" />
+          </Key>
+          <Property Name="Tn_IdSilla" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tn_Fila" Type="int" Nullable="false" />
+          <Property Name="Tn_Numero" Type="int" Nullable="false" />
+          <Property Name="Tn_IdSala" Type="int" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_SillaReserva">
+          <Key>
+            <PropertyRef Name="Tn_IdSillaReserva" />
+          </Key>
+          <Property Name="Tn_IdSillaReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tn_IdSilla" Type="int" Nullable="false" />
+          <Property Name="Tn_IdReservacion" Type="int" Nullable="false" />
+          <Property Name="Tn_IdProyeccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_TipoEstadoReservacion">
+          <Key>
+            <PropertyRef Name="Tn_IdEstadoReserva" />
+          </Key>
+          <Property Name="Tn_IdEstadoReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_DescripcionEstadoReserva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_TipoUsuario">
+          <Key>
+            <PropertyRef Name="Tn_IdTipoUsuario" />
+          </Key>
+          <Property Name="Tn_IdTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_DescripcionTipoUsuario" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Usuario">
+          <Key>
+            <PropertyRef Name="Tn_IdUsuario" />
+          </Key>
+          <Property Name="Tn_IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_NombreUsuario" Type="varchar" MaxLength="5000" Nullable="false" />
+          <Property Name="Tt_CorreoElectronico" Type="varbinary" MaxLength="500" Nullable="false" />
+          <Property Name="Tt_Contrasenna" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tt_Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Tf_FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Tn_IdTipoUsuario" Type="int" />
+          <Property Name="Tf_FechaCreacion" Type="datetime" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="TGenero">
+          <Key>
+            <PropertyRef Name="Tn_IdGenero" />
+          </Key>
+          <Property Name="Tn_IdGenero" Type="int" Nullable="false" />
+          <Property Name="Tt_NombreGenero" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="TPelicula">
+          <Key>
+            <PropertyRef Name="Tn_IdPelicula" />
+          </Key>
+          <Property Name="Tn_IdPelicula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tt_NombrePelicula" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tt_NombrePeliculaAdaptado" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tt_Resumen" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="Tn_DuracionMinutos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Tn_IdGenero" Type="int" Nullable="false" />
+          <Property Name="Tb_Estado" Type="bit" />
+        </EntityType>
+        <Association Name="FK_T_Proyeccion_T_Sala">
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="1" />
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Sala">
+              <PropertyRef Name="Tn_IdSala" />
+            </Principal>
+            <Dependent Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Proyeccion_TPelicula">
+          <End Role="TPelicula" Type="Self.TPelicula" Multiplicity="1" />
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPelicula">
+              <PropertyRef Name="Tn_IdPelicula" />
+            </Principal>
+            <Dependent Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdPelicula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Reservacion_T_Factura">
+          <End Role="T_Factura" Type="Self.T_Factura" Multiplicity="0..1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Factura">
+              <PropertyRef Name="Tn_IdFactura" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Reservacion_T_TipoEstadoReservacion">
+          <End Role="T_TipoEstadoReservacion" Type="Self.T_TipoEstadoReservacion" Multiplicity="1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_TipoEstadoReservacion">
+              <PropertyRef Name="Tn_IdEstadoReserva" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdEstadoReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Reservacion_T_Usuario">
+          <End Role="T_Usuario" Type="Self.T_Usuario" Multiplicity="1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Usuario">
+              <PropertyRef Name="Tn_IdUsuario" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Sala_T_SalaTipo">
+          <End Role="T_SalaTipo" Type="Self.T_SalaTipo" Multiplicity="0..1" />
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_SalaTipo">
+              <PropertyRef Name="Tn_IdTipoSala" />
+            </Principal>
+            <Dependent Role="T_Sala">
+              <PropertyRef Name="Tn_IdtipoSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Silla_T_Sala">
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="1" />
+          <End Role="T_Silla" Type="Self.T_Silla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Sala">
+              <PropertyRef Name="Tn_IdSala" />
+            </Principal>
+            <Dependent Role="T_Silla">
+              <PropertyRef Name="Tn_IdSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Proyeccion">
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdProyeccion" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdProyeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Reservacion">
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdReservacion" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdReservacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Silla">
+          <End Role="T_Silla" Type="Self.T_Silla" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Silla">
+              <PropertyRef Name="Tn_IdSilla" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdSilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Usuario_T_TipoUsuario">
+          <End Role="T_TipoUsuario" Type="Self.T_TipoUsuario" Multiplicity="0..1" />
+          <End Role="T_Usuario" Type="Self.T_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_TipoUsuario">
+              <PropertyRef Name="Tn_IdTipoUsuario" />
+            </Principal>
+            <Dependent Role="T_Usuario">
+              <PropertyRef Name="Tn_IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TPelicula_TGenero">
+          <End Role="TGenero" Type="Self.TGenero" Multiplicity="1" />
+          <End Role="TPelicula" Type="Self.TPelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TGenero">
+              <PropertyRef Name="Tn_IdGenero" />
+            </Principal>
+            <Dependent Role="TPelicula">
+              <PropertyRef Name="Tn_IdGenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CinemaModelStoreContainer">
+          <EntitySet Name="T_Factura" EntityType="Self.T_Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Parametros" EntityType="Self.T_Parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Proyeccion" EntityType="Self.T_Proyeccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Reservacion" EntityType="Self.T_Reservacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Sala" EntityType="Self.T_Sala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SalaTipo" EntityType="Self.T_SalaTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Silla" EntityType="Self.T_Silla" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SillaReserva" EntityType="Self.T_SillaReserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_TipoEstadoReservacion" EntityType="Self.T_TipoEstadoReservacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_TipoUsuario" EntityType="Self.T_TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Usuario" EntityType="Self.T_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TGenero" EntityType="Self.TGenero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TPelicula" EntityType="Self.TPelicula" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_T_Proyeccion_T_Sala" Association="Self.FK_T_Proyeccion_T_Sala">
+            <End Role="T_Sala" EntitySet="T_Sala" />
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Proyeccion_TPelicula" Association="Self.FK_T_Proyeccion_TPelicula">
+            <End Role="TPelicula" EntitySet="TPelicula" />
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Reservacion_T_Factura" Association="Self.FK_T_Reservacion_T_Factura">
+            <End Role="T_Factura" EntitySet="T_Factura" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Reservacion_T_TipoEstadoReservacion" Association="Self.FK_T_Reservacion_T_TipoEstadoReservacion">
+            <End Role="T_TipoEstadoReservacion" EntitySet="T_TipoEstadoReservacion" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Reservacion_T_Usuario" Association="Self.FK_T_Reservacion_T_Usuario">
+            <End Role="T_Usuario" EntitySet="T_Usuario" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Sala_T_SalaTipo" Association="Self.FK_T_Sala_T_SalaTipo">
+            <End Role="T_SalaTipo" EntitySet="T_SalaTipo" />
+            <End Role="T_Sala" EntitySet="T_Sala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Silla_T_Sala" Association="Self.FK_T_Silla_T_Sala">
+            <End Role="T_Sala" EntitySet="T_Sala" />
+            <End Role="T_Silla" EntitySet="T_Silla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Proyeccion" Association="Self.FK_T_SillaReserva_T_Proyeccion">
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Reservacion" Association="Self.FK_T_SillaReserva_T_Reservacion">
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Silla" Association="Self.FK_T_SillaReserva_T_Silla">
+            <End Role="T_Silla" EntitySet="T_Silla" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Usuario_T_TipoUsuario" Association="Self.FK_T_Usuario_T_TipoUsuario">
+            <End Role="T_TipoUsuario" EntitySet="T_TipoUsuario" />
+            <End Role="T_Usuario" EntitySet="T_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TPelicula_TGenero" Association="Self.FK_TPelicula_TGenero">
+            <End Role="TGenero" EntitySet="TGenero" />
+            <End Role="TPelicula" EntitySet="TPelicula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_Factura">
+          <Key>
+            <PropertyRef Name="Tn_IdFactura" />
+          </Key>
+          <Property Name="Tn_IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_DescripcionFactura" Type="Binary" MaxLength="5000" FixedLength="false" />
+          <Property Name="Tf_FechaFactura" Type="DateTime" Precision="3" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Reservacion" Relationship="Self.FK_T_Reservacion_T_Factura" FromRole="T_Factura" ToRole="T_Reservacion" />
+        </EntityType>
+        <EntityType Name="T_Parametros">
+          <Key>
+            <PropertyRef Name="Tn_IdParametro" />
+          </Key>
+          <Property Name="Tn_IdParametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_DescripcionParametro" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tn_Valor" Type="Int32" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="T_Proyeccion">
+          <Key>
+            <PropertyRef Name="Tn_IdProyeccion" />
+          </Key>
+          <Property Name="Tn_IdProyeccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tn_IdPelicula" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdSala" Type="Int32" Nullable="false" />
+          <Property Name="Tn_FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Sala" Relationship="Self.FK_T_Proyeccion_T_Sala" FromRole="T_Proyeccion" ToRole="T_Sala" />
+          <NavigationProperty Name="TPelicula" Relationship="Self.FK_T_Proyeccion_TPelicula" FromRole="T_Proyeccion" ToRole="TPelicula" />
+          <NavigationProperty Name="T_SillaReserva" Relationship="Self.FK_T_SillaReserva_T_Proyeccion" FromRole="T_Proyeccion" ToRole="T_SillaReserva" />
+        </EntityType>
+        <EntityType Name="T_Reservacion">
+          <Key>
+            <PropertyRef Name="Tn_IdReservacion" />
+          </Key>
+          <Property Name="Tn_IdReservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tn_IdProyeccion" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdEstadoReserva" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdFactura" Type="Int32" />
+          <NavigationProperty Name="T_Factura" Relationship="Self.FK_T_Reservacion_T_Factura" FromRole="T_Reservacion" ToRole="T_Factura" />
+          <NavigationProperty Name="T_TipoEstadoReservacion" Relationship="Self.FK_T_Reservacion_T_TipoEstadoReservacion" FromRole="T_Reservacion" ToRole="T_TipoEstadoReservacion" />
+          <NavigationProperty Name="T_Usuario" Relationship="Self.FK_T_Reservacion_T_Usuario" FromRole="T_Reservacion" ToRole="T_Usuario" />
+          <NavigationProperty Name="T_SillaReserva" Relationship="Self.FK_T_SillaReserva_T_Reservacion" FromRole="T_Reservacion" ToRole="T_SillaReserva" />
+        </EntityType>
+        <EntityType Name="T_Sala">
+          <Key>
+            <PropertyRef Name="Tn_IdSala" />
+          </Key>
+          <Property Name="Tn_IdSala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_NombreSala" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tn_NumeroAsientos" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdtipoSala" Type="Int32" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Proyeccion" Relationship="Self.FK_T_Proyeccion_T_Sala" FromRole="T_Sala" ToRole="T_Proyeccion" />
+          <NavigationProperty Name="T_SalaTipo" Relationship="Self.FK_T_Sala_T_SalaTipo" FromRole="T_Sala" ToRole="T_SalaTipo" />
+          <NavigationProperty Name="T_Silla" Relationship="Self.FK_T_Silla_T_Sala" FromRole="T_Sala" ToRole="T_Silla" />
+        </EntityType>
+        <EntityType Name="T_SalaTipo">
+          <Key>
+            <PropertyRef Name="Tn_IdTipoSala" />
+          </Key>
+          <Property Name="Tn_IdTipoSala" Type="Int32" Nullable="false" />
+          <Property Name="Tt_Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Sala" Relationship="Self.FK_T_Sala_T_SalaTipo" FromRole="T_SalaTipo" ToRole="T_Sala" />
+        </EntityType>
+        <EntityType Name="T_Silla">
+          <Key>
+            <PropertyRef Name="Tn_IdSilla" />
+          </Key>
+          <Property Name="Tn_IdSilla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tn_Fila" Type="Int32" Nullable="false" />
+          <Property Name="Tn_Numero" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdSala" Type="Int32" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Sala" Relationship="Self.FK_T_Silla_T_Sala" FromRole="T_Silla" ToRole="T_Sala" />
+          <NavigationProperty Name="T_SillaReserva" Relationship="Self.FK_T_SillaReserva_T_Silla" FromRole="T_Silla" ToRole="T_SillaReserva" />
+        </EntityType>
+        <EntityType Name="T_SillaReserva">
+          <Key>
+            <PropertyRef Name="Tn_IdSillaReserva" />
+          </Key>
+          <Property Name="Tn_IdSillaReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tn_IdSilla" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdReservacion" Type="Int32" Nullable="false" />
+          <Property Name="Tn_IdProyeccion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_Proyeccion" Relationship="Self.FK_T_SillaReserva_T_Proyeccion" FromRole="T_SillaReserva" ToRole="T_Proyeccion" />
+          <NavigationProperty Name="T_Reservacion" Relationship="Self.FK_T_SillaReserva_T_Reservacion" FromRole="T_SillaReserva" ToRole="T_Reservacion" />
+          <NavigationProperty Name="T_Silla" Relationship="Self.FK_T_SillaReserva_T_Silla" FromRole="T_SillaReserva" ToRole="T_Silla" />
+        </EntityType>
+        <EntityType Name="T_TipoEstadoReservacion">
+          <Key>
+            <PropertyRef Name="Tn_IdEstadoReserva" />
+          </Key>
+          <Property Name="Tn_IdEstadoReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_DescripcionEstadoReserva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Reservacion" Relationship="Self.FK_T_Reservacion_T_TipoEstadoReservacion" FromRole="T_TipoEstadoReservacion" ToRole="T_Reservacion" />
+        </EntityType>
+        <EntityType Name="T_TipoUsuario">
+          <Key>
+            <PropertyRef Name="Tn_IdTipoUsuario" />
+          </Key>
+          <Property Name="Tn_IdTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_DescripcionTipoUsuario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Usuario" Relationship="Self.FK_T_Usuario_T_TipoUsuario" FromRole="T_TipoUsuario" ToRole="T_Usuario" />
+        </EntityType>
+        <EntityType Name="T_Usuario">
+          <Key>
+            <PropertyRef Name="Tn_IdUsuario" />
+          </Key>
+          <Property Name="Tn_IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_NombreUsuario" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tt_CorreoElectronico" Type="Binary" MaxLength="500" FixedLength="false" Nullable="false" />
+          <Property Name="Tt_Contrasenna" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tt_Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tf_FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Tn_IdTipoUsuario" Type="Int32" />
+          <Property Name="Tf_FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Reservacion" Relationship="Self.FK_T_Reservacion_T_Usuario" FromRole="T_Usuario" ToRole="T_Reservacion" />
+          <NavigationProperty Name="T_TipoUsuario" Relationship="Self.FK_T_Usuario_T_TipoUsuario" FromRole="T_Usuario" ToRole="T_TipoUsuario" />
+        </EntityType>
+        <EntityType Name="TGenero">
+          <Key>
+            <PropertyRef Name="Tn_IdGenero" />
+          </Key>
+          <Property Name="Tn_IdGenero" Type="Int32" Nullable="false" />
+          <Property Name="Tt_NombreGenero" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="TPelicula" Relationship="Self.FK_TPelicula_TGenero" FromRole="TGenero" ToRole="TPelicula" />
+        </EntityType>
+        <EntityType Name="TPelicula">
+          <Key>
+            <PropertyRef Name="Tn_IdPelicula" />
+          </Key>
+          <Property Name="Tn_IdPelicula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tt_NombrePelicula" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tt_NombrePeliculaAdaptado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tt_Resumen" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tn_DuracionMinutos" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Tn_IdGenero" Type="Int32" Nullable="false" />
+          <Property Name="Tb_Estado" Type="Boolean" />
+          <NavigationProperty Name="T_Proyeccion" Relationship="Self.FK_T_Proyeccion_TPelicula" FromRole="TPelicula" ToRole="T_Proyeccion" />
+          <NavigationProperty Name="TGenero" Relationship="Self.FK_TPelicula_TGenero" FromRole="TPelicula" ToRole="TGenero" />
+        </EntityType>
+        <Association Name="FK_T_Reservacion_T_Factura">
+          <End Role="T_Factura" Type="Self.T_Factura" Multiplicity="0..1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Factura">
+              <PropertyRef Name="Tn_IdFactura" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Proyeccion_T_Sala">
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="1" />
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Sala">
+              <PropertyRef Name="Tn_IdSala" />
+            </Principal>
+            <Dependent Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Proyeccion_TPelicula">
+          <End Role="TPelicula" Type="Self.TPelicula" Multiplicity="1" />
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TPelicula">
+              <PropertyRef Name="Tn_IdPelicula" />
+            </Principal>
+            <Dependent Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdPelicula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Proyeccion">
+          <End Role="T_Proyeccion" Type="Self.T_Proyeccion" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Proyeccion">
+              <PropertyRef Name="Tn_IdProyeccion" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdProyeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Reservacion_T_TipoEstadoReservacion">
+          <End Role="T_TipoEstadoReservacion" Type="Self.T_TipoEstadoReservacion" Multiplicity="1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_TipoEstadoReservacion">
+              <PropertyRef Name="Tn_IdEstadoReserva" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdEstadoReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Reservacion_T_Usuario">
+          <End Role="T_Usuario" Type="Self.T_Usuario" Multiplicity="1" />
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Usuario">
+              <PropertyRef Name="Tn_IdUsuario" />
+            </Principal>
+            <Dependent Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Reservacion">
+          <End Role="T_Reservacion" Type="Self.T_Reservacion" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Reservacion">
+              <PropertyRef Name="Tn_IdReservacion" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdReservacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Sala_T_SalaTipo">
+          <End Role="T_SalaTipo" Type="Self.T_SalaTipo" Multiplicity="0..1" />
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_SalaTipo">
+              <PropertyRef Name="Tn_IdTipoSala" />
+            </Principal>
+            <Dependent Role="T_Sala">
+              <PropertyRef Name="Tn_IdtipoSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Silla_T_Sala">
+          <End Role="T_Sala" Type="Self.T_Sala" Multiplicity="1" />
+          <End Role="T_Silla" Type="Self.T_Silla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Sala">
+              <PropertyRef Name="Tn_IdSala" />
+            </Principal>
+            <Dependent Role="T_Silla">
+              <PropertyRef Name="Tn_IdSala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SillaReserva_T_Silla">
+          <End Role="T_Silla" Type="Self.T_Silla" Multiplicity="1" />
+          <End Role="T_SillaReserva" Type="Self.T_SillaReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Silla">
+              <PropertyRef Name="Tn_IdSilla" />
+            </Principal>
+            <Dependent Role="T_SillaReserva">
+              <PropertyRef Name="Tn_IdSilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_Usuario_T_TipoUsuario">
+          <End Role="T_TipoUsuario" Type="Self.T_TipoUsuario" Multiplicity="0..1" />
+          <End Role="T_Usuario" Type="Self.T_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_TipoUsuario">
+              <PropertyRef Name="Tn_IdTipoUsuario" />
+            </Principal>
+            <Dependent Role="T_Usuario">
+              <PropertyRef Name="Tn_IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TPelicula_TGenero">
+          <End Role="TGenero" Type="Self.TGenero" Multiplicity="1" />
+          <End Role="TPelicula" Type="Self.TPelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TGenero">
+              <PropertyRef Name="Tn_IdGenero" />
+            </Principal>
+            <Dependent Role="TPelicula">
+              <PropertyRef Name="Tn_IdGenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Factura" EntityType="Self.T_Factura" />
+          <EntitySet Name="T_Parametros" EntityType="Self.T_Parametros" />
+          <EntitySet Name="T_Proyeccion" EntityType="Self.T_Proyeccion" />
+          <EntitySet Name="T_Reservacion" EntityType="Self.T_Reservacion" />
+          <EntitySet Name="T_Sala" EntityType="Self.T_Sala" />
+          <EntitySet Name="T_SalaTipo" EntityType="Self.T_SalaTipo" />
+          <EntitySet Name="T_Silla" EntityType="Self.T_Silla" />
+          <EntitySet Name="T_SillaReserva" EntityType="Self.T_SillaReserva" />
+          <EntitySet Name="T_TipoEstadoReservacion" EntityType="Self.T_TipoEstadoReservacion" />
+          <EntitySet Name="T_TipoUsuario" EntityType="Self.T_TipoUsuario" />
+          <EntitySet Name="T_Usuario" EntityType="Self.T_Usuario" />
+          <EntitySet Name="TGenero" EntityType="Self.TGenero" />
+          <EntitySet Name="TPelicula" EntityType="Self.TPelicula" />
+          <AssociationSet Name="FK_T_Reservacion_T_Factura" Association="Self.FK_T_Reservacion_T_Factura">
+            <End Role="T_Factura" EntitySet="T_Factura" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Proyeccion_T_Sala" Association="Self.FK_T_Proyeccion_T_Sala">
+            <End Role="T_Sala" EntitySet="T_Sala" />
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Proyeccion_TPelicula" Association="Self.FK_T_Proyeccion_TPelicula">
+            <End Role="TPelicula" EntitySet="TPelicula" />
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Proyeccion" Association="Self.FK_T_SillaReserva_T_Proyeccion">
+            <End Role="T_Proyeccion" EntitySet="T_Proyeccion" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Reservacion_T_TipoEstadoReservacion" Association="Self.FK_T_Reservacion_T_TipoEstadoReservacion">
+            <End Role="T_TipoEstadoReservacion" EntitySet="T_TipoEstadoReservacion" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Reservacion_T_Usuario" Association="Self.FK_T_Reservacion_T_Usuario">
+            <End Role="T_Usuario" EntitySet="T_Usuario" />
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Reservacion" Association="Self.FK_T_SillaReserva_T_Reservacion">
+            <End Role="T_Reservacion" EntitySet="T_Reservacion" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Sala_T_SalaTipo" Association="Self.FK_T_Sala_T_SalaTipo">
+            <End Role="T_SalaTipo" EntitySet="T_SalaTipo" />
+            <End Role="T_Sala" EntitySet="T_Sala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Silla_T_Sala" Association="Self.FK_T_Silla_T_Sala">
+            <End Role="T_Sala" EntitySet="T_Sala" />
+            <End Role="T_Silla" EntitySet="T_Silla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SillaReserva_T_Silla" Association="Self.FK_T_SillaReserva_T_Silla">
+            <End Role="T_Silla" EntitySet="T_Silla" />
+            <End Role="T_SillaReserva" EntitySet="T_SillaReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_Usuario_T_TipoUsuario" Association="Self.FK_T_Usuario_T_TipoUsuario">
+            <End Role="T_TipoUsuario" EntitySet="T_TipoUsuario" />
+            <End Role="T_Usuario" EntitySet="T_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TPelicula_TGenero" Association="Self.FK_TPelicula_TGenero">
+            <End Role="TGenero" EntitySet="TGenero" />
+            <End Role="TPelicula" EntitySet="TPelicula" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CinemaModelStoreContainer" CdmEntityContainer="CinemaEntities">
+          <EntitySetMapping Name="T_Factura">
+            <EntityTypeMapping TypeName="CinemaModel.T_Factura">
+              <MappingFragment StoreEntitySet="T_Factura">
+                <ScalarProperty Name="Tn_IdFactura" ColumnName="Tn_IdFactura" />
+                <ScalarProperty Name="Tt_DescripcionFactura" ColumnName="Tt_DescripcionFactura" />
+                <ScalarProperty Name="Tf_FechaFactura" ColumnName="Tf_FechaFactura" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Parametros">
+            <EntityTypeMapping TypeName="CinemaModel.T_Parametros">
+              <MappingFragment StoreEntitySet="T_Parametros">
+                <ScalarProperty Name="Tn_IdParametro" ColumnName="Tn_IdParametro" />
+                <ScalarProperty Name="Tt_DescripcionParametro" ColumnName="Tt_DescripcionParametro" />
+                <ScalarProperty Name="Tn_Valor" ColumnName="Tn_Valor" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Proyeccion">
+            <EntityTypeMapping TypeName="CinemaModel.T_Proyeccion">
+              <MappingFragment StoreEntitySet="T_Proyeccion">
+                <ScalarProperty Name="Tn_IdProyeccion" ColumnName="Tn_IdProyeccion" />
+                <ScalarProperty Name="Tn_IdPelicula" ColumnName="Tn_IdPelicula" />
+                <ScalarProperty Name="Tn_IdSala" ColumnName="Tn_IdSala" />
+                <ScalarProperty Name="Tn_FechaHora" ColumnName="Tn_FechaHora" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Reservacion">
+            <EntityTypeMapping TypeName="CinemaModel.T_Reservacion">
+              <MappingFragment StoreEntitySet="T_Reservacion">
+                <ScalarProperty Name="Tn_IdReservacion" ColumnName="Tn_IdReservacion" />
+                <ScalarProperty Name="Tn_IdProyeccion" ColumnName="Tn_IdProyeccion" />
+                <ScalarProperty Name="Tn_IdUsuario" ColumnName="Tn_IdUsuario" />
+                <ScalarProperty Name="Tn_IdEstadoReserva" ColumnName="Tn_IdEstadoReserva" />
+                <ScalarProperty Name="Tn_IdFactura" ColumnName="Tn_IdFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Sala">
+            <EntityTypeMapping TypeName="CinemaModel.T_Sala">
+              <MappingFragment StoreEntitySet="T_Sala">
+                <ScalarProperty Name="Tn_IdSala" ColumnName="Tn_IdSala" />
+                <ScalarProperty Name="Tt_NombreSala" ColumnName="Tt_NombreSala" />
+                <ScalarProperty Name="Tn_NumeroAsientos" ColumnName="Tn_NumeroAsientos" />
+                <ScalarProperty Name="Tn_IdtipoSala" ColumnName="Tn_IdtipoSala" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SalaTipo">
+            <EntityTypeMapping TypeName="CinemaModel.T_SalaTipo">
+              <MappingFragment StoreEntitySet="T_SalaTipo">
+                <ScalarProperty Name="Tn_IdTipoSala" ColumnName="Tn_IdTipoSala" />
+                <ScalarProperty Name="Tt_Descripcion" ColumnName="Tt_Descripcion" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Silla">
+            <EntityTypeMapping TypeName="CinemaModel.T_Silla">
+              <MappingFragment StoreEntitySet="T_Silla">
+                <ScalarProperty Name="Tn_IdSilla" ColumnName="Tn_IdSilla" />
+                <ScalarProperty Name="Tn_Fila" ColumnName="Tn_Fila" />
+                <ScalarProperty Name="Tn_Numero" ColumnName="Tn_Numero" />
+                <ScalarProperty Name="Tn_IdSala" ColumnName="Tn_IdSala" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SillaReserva">
+            <EntityTypeMapping TypeName="CinemaModel.T_SillaReserva">
+              <MappingFragment StoreEntitySet="T_SillaReserva">
+                <ScalarProperty Name="Tn_IdSillaReserva" ColumnName="Tn_IdSillaReserva" />
+                <ScalarProperty Name="Tn_IdSilla" ColumnName="Tn_IdSilla" />
+                <ScalarProperty Name="Tn_IdReservacion" ColumnName="Tn_IdReservacion" />
+                <ScalarProperty Name="Tn_IdProyeccion" ColumnName="Tn_IdProyeccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_TipoEstadoReservacion">
+            <EntityTypeMapping TypeName="CinemaModel.T_TipoEstadoReservacion">
+              <MappingFragment StoreEntitySet="T_TipoEstadoReservacion">
+                <ScalarProperty Name="Tn_IdEstadoReserva" ColumnName="Tn_IdEstadoReserva" />
+                <ScalarProperty Name="Tt_DescripcionEstadoReserva" ColumnName="Tt_DescripcionEstadoReserva" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_TipoUsuario">
+            <EntityTypeMapping TypeName="CinemaModel.T_TipoUsuario">
+              <MappingFragment StoreEntitySet="T_TipoUsuario">
+                <ScalarProperty Name="Tn_IdTipoUsuario" ColumnName="Tn_IdTipoUsuario" />
+                <ScalarProperty Name="Tt_DescripcionTipoUsuario" ColumnName="Tt_DescripcionTipoUsuario" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Usuario">
+            <EntityTypeMapping TypeName="CinemaModel.T_Usuario">
+              <MappingFragment StoreEntitySet="T_Usuario">
+                <ScalarProperty Name="Tn_IdUsuario" ColumnName="Tn_IdUsuario" />
+                <ScalarProperty Name="Tt_NombreUsuario" ColumnName="Tt_NombreUsuario" />
+                <ScalarProperty Name="Tt_CorreoElectronico" ColumnName="Tt_CorreoElectronico" />
+                <ScalarProperty Name="Tt_Contrasenna" ColumnName="Tt_Contrasenna" />
+                <ScalarProperty Name="Tt_Telefono" ColumnName="Tt_Telefono" />
+                <ScalarProperty Name="Tf_FechaNacimiento" ColumnName="Tf_FechaNacimiento" />
+                <ScalarProperty Name="Tn_IdTipoUsuario" ColumnName="Tn_IdTipoUsuario" />
+                <ScalarProperty Name="Tf_FechaCreacion" ColumnName="Tf_FechaCreacion" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TGenero">
+            <EntityTypeMapping TypeName="CinemaModel.TGenero">
+              <MappingFragment StoreEntitySet="TGenero">
+                <ScalarProperty Name="Tn_IdGenero" ColumnName="Tn_IdGenero" />
+                <ScalarProperty Name="Tt_NombreGenero" ColumnName="Tt_NombreGenero" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TPelicula">
+            <EntityTypeMapping TypeName="CinemaModel.TPelicula">
+              <MappingFragment StoreEntitySet="TPelicula">
+                <ScalarProperty Name="Tn_IdPelicula" ColumnName="Tn_IdPelicula" />
+                <ScalarProperty Name="Tt_NombrePelicula" ColumnName="Tt_NombrePelicula" />
+                <ScalarProperty Name="Tt_NombrePeliculaAdaptado" ColumnName="Tt_NombrePeliculaAdaptado" />
+                <ScalarProperty Name="Tt_Resumen" ColumnName="Tt_Resumen" />
+                <ScalarProperty Name="Tn_DuracionMinutos" ColumnName="Tn_DuracionMinutos" />
+                <ScalarProperty Name="Tn_IdGenero" ColumnName="Tn_IdGenero" />
+                <ScalarProperty Name="Tb_Estado" ColumnName="Tb_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

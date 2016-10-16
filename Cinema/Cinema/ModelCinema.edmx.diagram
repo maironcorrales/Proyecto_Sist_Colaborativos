@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7040a1dfcd014a84b5ebe5fd8caf9a23" Name="Diagram1">
+        <EntityTypeShape EntityType="CinemaModel.T_Factura" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Parametros" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Proyeccion" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Reservacion" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Sala" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_SalaTipo" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Silla" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_SillaReserva" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_TipoEstadoReservacion" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_TipoUsuario" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.T_Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.TGenero" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModel.TPelicula" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <AssociationConnector Association="CinemaModel.FK_T_Reservacion_T_Factura" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Proyeccion_T_Sala" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Proyeccion_TPelicula" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_SillaReserva_T_Proyeccion" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Reservacion_T_TipoEstadoReservacion" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Reservacion_T_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_SillaReserva_T_Reservacion" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Sala_T_SalaTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Silla_T_Sala" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_SillaReserva_T_Silla" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_T_Usuario_T_TipoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_TPelicula_TGenero" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
